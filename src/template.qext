@@ -1,0 +1,8 @@
+{
+  "name" : "Visualization Template",
+  "description" : "Visualization Template",
+  "icon" : "extension",
+  "type" : "visualization",
+  "version": "1.0",
+  "author": "Alexander Nerush"
+}
