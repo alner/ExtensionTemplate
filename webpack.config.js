@@ -15,7 +15,7 @@ module.exports = (env = {}) => {
     const CWD = process.cwd()
     // TODO? change BUILD_DIR to extensions/.../
     const DEPLOY_PATH = env.deploy;
-    const BUILD_DIR = path.resolve(CWD, 'build') 
+    const BUILD_DIR = path.resolve(DEPLOY_PATH) || path.resolve(CWD, 'build') 
     const SRC_DIR = path.resolve(CWD, 'src')
 
     //const ENV = process.env.NODE_ENV || 'development'
@@ -55,7 +55,7 @@ module.exports = (env = {}) => {
                         },
                         {
                             loader: 'css-loader',
-                            options: { modules: true },
+                            options: { modules: false },
                         },
                         {
                             loader: 'postcss-loader',
