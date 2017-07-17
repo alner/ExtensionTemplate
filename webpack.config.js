@@ -53,7 +53,8 @@ module.exports = (env = {}) => {
         },
         externals: [
             'qlik',
-            'js/qlik'
+            'js/qlik',
+            'jquery'
         ],
         plugins: [
             new webpack.optimize.ModuleConcatenationPlugin(),
@@ -93,21 +94,29 @@ module.exports = (env = {}) => {
     } else {
         // Development mode
         config.plugins.push(
-            new WebpackDashboardPlugin(), // Comment if you need standard webpack output to console
+            // new WebpackDashboardPlugin(), // if you need webpack dashboard uncomment it and add "webpack-dashboard --" in package json for dev command at the very beginning
             new webpack.HotModuleReplacementPlugin(),
             new webpack.NamedModulesPlugin(),
             new WebpackDiskPlugin({
                 output: {
                     path: DEPLOY_PATH
                 },
-                files: [{ 
-                    asset: /[name]/,
-                    output: { 
-                        filename: function(assetname) {
-                            return assetname;
+                files: [
+                    {
+                        asset: /[name]/,
+                        output: { 
+                            filename: function(assetname) {
+                                // excludes hot-updates from writing to disk to new file every time
+                                const matches = assetname.match(/(hot-update\.(js|json))$/)
+                                if(matches && matches.length > 0) {
+                                    return matches[0];
+                                }
+
+                                return assetname;
+                            }
                         }
                     }
-                }]
+                ]
             })
         );
     }
