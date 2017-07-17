@@ -10,8 +10,5 @@ export const paint = ($element, layout) => {
             const NextComponent = require('./component').default
             NextComponent($element, layout)
         })
-
-        // or try line bellow...
-        //module.hot.accept();
     }
 }

@@ -12,7 +12,7 @@ export const definition = {
 						uses: "sorting"
 					},
 					appearance: {
-						uses: "settings"
-					}
+                        uses: "settings"
+                    }
 				}
 			}

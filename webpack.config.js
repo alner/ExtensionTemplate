@@ -2,7 +2,8 @@ const webpack = require('webpack')
 const WebpackCleanPlugin = require('clean-webpack-plugin')
 const WebpackCopyPlugin = require('copy-webpack-plugin')
 const WebpackZipPlugin = require('zip-webpack-plugin')
-const WebpackDiskPlugin = require("webpack-disk-plugin")
+const WebPackExtractTextPlugin = require('extract-text-webpack-plugin')
+const WebpackDiskPlugin = require('webpack-disk-plugin')
 const WebpackDashboardPlugin = require('webpack-dashboard/plugin')
 const path = require('path')
 
@@ -45,7 +46,49 @@ module.exports = (env = {}) => {
                     test: /\.js$/,
                     loader: 'babel-loader',
                     exclude: /node_modules/
+                },
+                {
+                    test: /\.css$/,
+                    use:  [
+                        {
+                            loader: 'style-loader'
+                        },
+                        {
+                            loader: 'css-loader',
+                            options: { modules: true },
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                plugins: () => ([
+                                require('autoprefixer'),
+                                require('precss'),
+                                ]),
+                            },
+                        },
+                    ]
                 }
+/*                    
+                    use:  WebPackExtractTextPlugin.extract({
+                            fallback: 'style-loader',
+                            use: [ 
+                                {
+                                    loader: 'css-loader',
+                                    options: { importLoaders: 1 },
+                                },
+                                {
+                                    loader: 'postcss-loader',
+                                    options: {
+                                        plugins: () => ([
+                                        require('autoprefixer'),
+                                        require('precss'),
+                                        ]),
+                                    },
+                                },
+                            ]
+                    })
+                }
+*/                
             ]
         },
         resolve: {
@@ -62,6 +105,7 @@ module.exports = (env = {}) => {
             new webpack.DefinePlugin({
                 'process.env.NODE_ENV': JSON.stringify(ENV)
             }),
+            // new WebPackExtractTextPlugin("styles.css"),
             new WebpackCopyPlugin([{
                 from: 'template.qext',
                 to: path.resolve(BUILD_DIR, `${NAME}.qext`)
@@ -83,8 +127,12 @@ module.exports = (env = {}) => {
     }
 
     if(PRODUCTION) {
-        // TODO...
         config.plugins.push(
+            new webpack.optimize.UglifyJsPlugin({
+                compress: {
+                    warnings: false
+                }
+            }),
             new WebpackZipPlugin({
                 filename: ZIP_FILE,
             })
