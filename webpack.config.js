@@ -5,6 +5,7 @@ const WebpackZipPlugin = require('zip-webpack-plugin')
 const WebPackExtractTextPlugin = require('extract-text-webpack-plugin')
 const WebpackDiskPlugin = require('webpack-disk-plugin')
 const WebpackDashboardPlugin = require('webpack-dashboard/plugin')
+const WebpackShellPlugin = require('webpack-shell-plugin');
 const path = require('path')
 
 
@@ -13,15 +14,14 @@ module.exports = (env = {}) => {
 
     const NAME = path.basename(__dirname);
     const CWD = process.cwd()
-    // TODO? change BUILD_DIR to extensions/.../
-    const DEPLOY_PATH = env.deploy;
-    const BUILD_DIR = path.resolve(DEPLOY_PATH) || path.resolve(CWD, 'build') 
+    const BUILD_OUTPUT = env.build_output;
+    const DEPLOY_COMMAND = env.deploy_command;
+    const BUILD_DIR = (BUILD_OUTPUT && path.resolve(BUILD_OUTPUT)) || path.resolve(CWD, 'build') 
     const SRC_DIR = path.resolve(CWD, 'src')
 
-    //const ENV = process.env.NODE_ENV || 'development'
     // const PKG = require('./package.json')
 
-    const PRODUCTION = env.production === true // ENV === 'production'
+    const PRODUCTION = env.production === true 
     const DEV_URL = (!PRODUCTION && env.url) || '' // for DEVELOPMENT ONLY
     const ENV = PRODUCTION ? 'production' : 'development'
     const ZIP_FILE = `${NAME}.zip`
@@ -138,6 +138,12 @@ module.exports = (env = {}) => {
             })
         )
 
+        if(DEPLOY_COMMAND)
+            config.plugins.push(
+                new WebpackShellPlugin({onBuildEnd:[DEPLOY_COMMAND]})
+            );
+
+
         config.devtool = false
     } else {
         // Development mode
@@ -147,7 +153,7 @@ module.exports = (env = {}) => {
             new webpack.NamedModulesPlugin(),
             new WebpackDiskPlugin({
                 output: {
-                    path: DEPLOY_PATH
+                    path: BUILD_OUTPUT
                 },
                 files: [
                     {

@@ -4,9 +4,9 @@
   "description": "Qlik Sense Extension template",
   "main": "index.js",
   "scripts": {
-    "dev": "node_modules/.bin/webpack-dev-server --env.development --env.url=http://localhost:4848/sense/app/C%3A%5CUsers%5Cnerush%5CDocuments%5CQlik%5CSense%5CApps%5CExtTest.qvf/sheet/dd660e1a-6fc7-4a58-9f48-26a3c066d66a/state/edit --env.deploy=C:/Users/nerush/Documents/Qlik/Sense/Extensions/TestTemplate --progress",
+    "dev": "node_modules/.bin/webpack-dev-server --env.development --env.url=http://localhost:4848/sense/app/C%3A%5CUsers%5Cnerush%5CDocuments%5CQlik%5CSense%5CApps%5CExtTest.qvf/sheet/dd660e1a-6fc7-4a58-9f48-26a3c066d66a/state/edit --env.build_output=C:/Users/nerush/Documents/Qlik/Sense/Extensions/TestTemplate --progress",
     "build": "webpack -p --env.production --progress --colors",
-    "deploy": "webpack -p --env.production --env.deploy=C:/Users/nerush/Documents/Qlik/Sense/Extensions/TestTemplate --progress --colors"
+    "deploy": "webpack -p --env.production --env.deploy_command=deploy.bat --progress --colors"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,7 @@
     "webpack-dashboard": "^0.4.0",
     "webpack-dev-server": "^2.5.1",
     "webpack-disk-plugin": "0.0.2",
+    "webpack-shell-plugin": "^0.5.0",
     "zip-webpack-plugin": "^1.1.0"
   }
 }
