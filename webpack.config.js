@@ -14,9 +14,9 @@ module.exports = (env = {}) => {
 
     const NAME = path.basename(__dirname);
     const CWD = process.cwd()
-    const BUILD_OUTPUT = env.build_output;
+    const BUILD_OUTPUT = env.build_output || 'build';
     const DEPLOY_COMMAND = env.deploy_command;
-    const BUILD_DIR = (BUILD_OUTPUT && path.resolve(BUILD_OUTPUT)) || path.resolve(CWD, 'build') 
+    const BUILD_DIR = path.resolve(BUILD_OUTPUT) // || path.resolve(CWD, 'build')
     const SRC_DIR = path.resolve(CWD, 'src')
 
     // const PKG = require('./package.json')
