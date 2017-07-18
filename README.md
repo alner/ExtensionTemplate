@@ -1,5 +1,7 @@
 # Qlik Sense visualization template
 
+![Usage](https://github.com/alner/ExtensionTemplate/blob/master/doc/usage.gif?raw=true)
+
 ## Installation
 
 Download and unzip template to appropriate folder.
