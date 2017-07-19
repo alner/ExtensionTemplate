@@ -1,3 +1,3 @@
-export * from './initialProperties'
-export * from './definition'
-export * from './paint'
+export * from './initialProperties';
+export * from './definition';
+export * from './paint';

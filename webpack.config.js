@@ -44,6 +44,14 @@ module.exports = (env = {}) => {
             rules: [
                 {
                     test: /\.js$/,
+                    enforce: 'pre',
+                    loader: 'eslint-loader',
+                    options: {
+                      emitWarning: true,
+                    },
+                },
+                {
+                    test: /\.js$/,
                     loader: 'babel-loader',
                     exclude: /node_modules/
                 },
@@ -122,7 +130,11 @@ module.exports = (env = {}) => {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
                 "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
-            }            
+            },
+            overlay: {
+                errors: true,
+                warnings: true,
+            },
         }
     }
 
