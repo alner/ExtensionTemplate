@@ -1,11 +1,8 @@
 {
   "env": {
-    "browser": true,
-    "commonjs": true,
-    "es6": true,
-    "node": true
+    "browser": true
   },
-  "extends": ["eslint:recommended"],
+  "extends": ["airbnb", "eslint:recommended"],
   "parserOptions": {
     "sourceType": "module"
   },
@@ -16,6 +13,13 @@
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
     "no-unused-vars": ["warn"],
-    "no-console": 0
+    "no-console": 0,
+    "import/no-extraneous-dependencies": ["warn", {"devDependencies": false, "optionalDependencies": false, "peerDependencies": false}],
+    "jsx-a11y/href-no-hash": 0,
+    "import/prefer-default-export": 0,
+    "react/forbid-prop-types": [1, { "forbid": ["any"] }]
+  },
+  "settings": {
+      "import/core-modules": ["qlik"]
   }
 }
