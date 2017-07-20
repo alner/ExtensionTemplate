@@ -32,7 +32,7 @@ module.exports = (env = {}) => {
     cache: true,
     entry: {
       [`${NAME}`]: ['./index.js'],
-//      vendors: ['react', 'react-dom'],
+      //      vendors: ['react', 'react-dom'],
     },
     output: {
       path: BUILD_DIR,
@@ -102,6 +102,11 @@ module.exports = (env = {}) => {
     },
     resolve: {
       extensions: ['.js', '.jsx'],
+      alias: {
+        'preact-compat': 'preact-compat/dist/preact-compat',
+        'react': 'preact-compat',
+        'react-dom': 'preact-compat',
+      },
     },
     externals: [
       'qlik',

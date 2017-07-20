@@ -6,7 +6,7 @@ import './styles.css';
 const Component = ({ layout }) => {
   console.log(qlik, layout);
   return (
-    <h1 className='qv-object-test-extension'>Hello Qlik!</h1>
+    <h1 className='qv-object-test-extension'>Hello qlik!</h1>
   );
 };
 
