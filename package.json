@@ -30,9 +30,9 @@
     "postcss-loader": "^2.0.6",
     "precss": "^2.0.0",
     "style-loader": "^0.18.2",
-    "webpack": "^3.2.0",
+    "webpack": "^3.5.4",
     "webpack-dashboard": "^0.4.0",
-    "webpack-dev-server": "^2.5.1",
+    "webpack-dev-server": "^2.7.1",
     "webpack-disk-plugin": "0.0.2",
     "webpack-shell-plugin": "^0.5.0",
     "zip-webpack-plugin": "^1.1.0"
